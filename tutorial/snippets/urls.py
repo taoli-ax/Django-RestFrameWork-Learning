@@ -5,8 +5,8 @@ from django.urls import path
 
 
 urlpatterns = [
-    path(r'snippets/', snippet_list),
-    path(r'detail/<int:pk>', snippet_detail)
+    path(r'snippets/', SnippetList.as_view()),
+    path(r'detail/<int:pk>', SnippetDetail.as_view())
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
