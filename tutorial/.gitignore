@@ -1,0 +1,4 @@
+rf_venv
+.idea
+__pycache__
+db.sqlite3
