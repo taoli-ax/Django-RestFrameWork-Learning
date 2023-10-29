@@ -2,6 +2,7 @@
 
 
 ## jwt,simple jwt
+https://blog.devgenius.io/json-web-token-jwt-in-django-rest-framework-drf-2896c56b596e
 ```text
     如何理解jwt的工作方式
 ```
