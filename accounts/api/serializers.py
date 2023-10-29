@@ -1,19 +1,21 @@
 from rest_framework import serializers
-
-from cars.models import Cars
+from django.contrib.auth.models import User
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework.response import Response
-from rest_framework import status
 
 
-class CarsSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Cars
-        fields = ('car_type', 'name')
+
+# class LoginSerializer(serializers.Serializer):
+#     username = serializers.CharField()
+#     password = serializers.CharField()
+
+#     def validate(self, attrs):
+
+#         return super().validate(attrs)
 
 
-class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+
+class LoginTokenObtainPairSerializer(TokenObtainPairSerializer):
     """
     原文链接: https://blog.csdn.net/u014783334/article/details/124841293
     """
@@ -42,28 +44,8 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         # 令牌到期时间
         data['expire'] = refresh.access_token.payload['exp']  # 有效期
         # 用户名
-        data['username'] = self.user.username
+        print(self.user)
+        data['user_id'] = self.user.id
         # 手机号
         # data['mobile'] = self.user.mobile
         return data
-    
-
-
-
-
-class CustomTokenObtainPairView(TokenObtainPairView):
-    serializer_class = CustomTokenObtainPairSerializer
-
-    def post(self, request, *args, **kwargs):
-            serializer = self.get_serializer(data=request.data)
-            serializer.is_valid(raise_exception=True)
-
-            response_data = {
-                'message': f'{serializer.validated_data["username"]},这是顽童你知道的 !',
-                'tokens': {
-                    'refresh': serializer.validated_data['refresh'],
-                    'access': serializer.validated_data['access'],
-                }
-            }
-
-            return Response(response_data, status=status.HTTP_200_OK)
