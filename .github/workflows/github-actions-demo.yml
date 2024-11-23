@@ -1,10 +1,6 @@
 name: Python app
 run-name: ${{github.actor}} is demo testing out Github Actions!
-on:
-  push:
-    branches: [ $default-branch ]
-  pull_request:
-    branches: [ $default-branch ]
+on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
