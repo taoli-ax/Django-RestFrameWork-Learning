@@ -3,6 +3,8 @@ run-name: ${{github.actor}} is demo testing out Github Actions!
 on:
   push:
     branches: [ $default-branch ]
+  pull_request:
+    branches: [ $default-branch ]
 jobs:
   build:
     runs-on: ubuntu-latest
