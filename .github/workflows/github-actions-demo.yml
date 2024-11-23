@@ -1,5 +1,5 @@
 name: Python app
-runname: {{github.actor}} is testing out Github Actions!
+run-name: {{github.actor}} is testing out Github Actions!
 on:
   push:
     branches: [ $default-branch ]
